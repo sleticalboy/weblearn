@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>demo</title>
+</head>
+<body>
+  <p>编程语言：</p>
+  <ul>
+    <li>python</li>
+    <li>go</li>
+    <li class="web">web</li>
+  </ul>
+  <h1>header 1</h1>
+  <p><a href="">链接</a></p>
+  <div><div id="box"></div></div>
+  <span>span block</span> <br>
+  <em>em block</em>
+  <artical>
+    <li>item 1</li>
+    <li class="A">item 2</li>
+    <li class="a b">item 3</li>
+    <li class="ab">item 4</li>
+  </artical>
+  <p class="pbox">p block content</p>
+</body>
+</html>
+
+<style>
+  .pbox::before {
+    content: '→→→';
+  }
+  .pbox::after {
+    content: '←←←';
+  }
+  li[class] {
+    font-size: 200%;
+  }
+  li[class='a' i] {
+    background-color: turquoise;
+  }
+  li[class$='b'] {
+    color: red;
+  }
+  span {
+    background-color: aquamarine;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  em {
+    color: black;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  body {
+    background-color: none;
+  }
+  p {
+    font-weight: bold;
+    color: red;
+    font-size: 150%;
+  }
+  ul :first-child {
+    font-size: 200%;
+    color: brown;
+  }
+  li {
+    color:cadetblue;
+    font-size: 150%;
+  }
+  .web {
+    font-size: 2em;
+    color: yellowgreen;
+  }
+  h1 {
+    background-color: yellowgreen;
+    width: calc(100% - 100px);
+    border: 15px solid black;
+    border-color: aliceblue;
+    padding: 5px;
+  }
+  a:link {
+    color: pink;
+  }
+  a:visited {
+    color: red;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  #box {
+    margin: 30px;
+    width: 100px;
+    height: 100px;
+    background-color: rebeccapurple;
+    transform: rotate(0.8turn);
+  }
+</style>
