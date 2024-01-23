@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盒模型</title>
+</head>
+
+<body>
+  <h1>盒模型</h1>
+  <p>I am a paragraph. A short one.</p>
+  <ul>
+    <li>Item One</li>
+    <li>Item Two</li>
+    <li>Item Three</li>
+  </ul>
+  <p>I am another paragraph. Some of the <span class="block">words</span> have been wrapped in a <span>span
+      element</span>.</p>
+
+  <div class="box">
+    <div class="innerbox">This box has a height and a width. This means that if there is too much content to be
+      displayed within the assigned height, there will be an overflow situation. If overflow is set to hidden then any
+      overflow will not be visible.</div>
+  </div>
+
+  <div>
+    <p class="txt">hello world</p>
+  </div>
+
+  <div style="padding: 10px;">
+    <form>
+      <div><label for="name">Name</label>
+        <input type="text" id="name">
+      </div>
+      <div><label for="email">Email</label>
+        <input type="email" id="email">
+      </div>
+
+      <div class="buttons"><input type="submit" value="Submit"></div>
+    </form>
+  </div>
+</body>
+
+</html>
+
+<style>
+  label {
+    color: red;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
+  input[type='text'],
+  input[type='email'] {
+    width: 100% - 50px;
+    padding: 10px;
+    margin: 0 0 1em 0;
+    border: 2px solid #000;
+  }
+  input[type='submit'] {
+    color: #fff;
+    border: 3px solid #333;
+    background-color: #999;
+    border-radius: 5px;
+    padding: 10px 2em;
+    font-weight: bold;
+  }
+  input[type='submit']:hover, input[type='submit']:focus {
+    background-color: #333;
+  }
+
+  .txt {
+    /* 文本横向或者竖向布局 */
+    writing-mode: vertical-rl;
+  }
+
+  .innerbox {
+    width: 150px;
+    height: 150px;
+    background-color: aquamarine;
+    margin: 50px 50px;
+    border: 5px dotted black;
+    background-image: linear-gradient(105deg, rgb(0 249 255 / 100%) 39%, rgb(51 56 57 / 100%) 96%);
+    /* 元素溢出方式、方向 */
+    overflow-y: scroll;
+  }
+
+  .box {
+    width: 300px;
+    height: 300px;
+    background-color: aqua;
+    /* padding: 25px; */
+    border: 3px solid red;
+    border-radius: 10px;
+  }
+
+  p,
+  ul {
+    border: 2px solid rebeccapurple;
+    padding: .5em;
+  }
+
+  .block,
+  li {
+    border: 2px solid blue;
+    padding: .5em;
+  }
+
+  ul {
+    display: inline-flex;
+    list-style: none;
+  }
+
+  .block {
+    display: block;
+  }
+</style>

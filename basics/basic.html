@@ -8,7 +8,7 @@
 </head>
 <body>
   <p>编程语言：</p>
-  <ul>
+  <ul class="main">
     <li>python</li>
     <li>go</li>
     <li class="web">web</li>
@@ -24,17 +24,40 @@
     <li class="a b">item 3</li>
     <li class="ab">item 4</li>
   </artical>
-  <p class="pbox">p block content</p>
+  <div style="background-color:azure;">
+    <p class="pbox">p block content</p>
+    <h2>header 2</h2>
+    <div>hello div block</div>
+    <h2>header 2</h2>
+  </div>
+
+  <div>
+    <ul class="main">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul>
+  </div>
 </body>
 </html>
 
 <style>
+  .main {
+    border: 2px solid #ccc;
+    padding: 2em;
+  }
+  /* 兄弟选择器 */
+  p ~ h2 {
+    color: yellowgreen;
+    font-size: 200%;
+  }
   .pbox::before {
     content: '→→→';
   }
   .pbox::after {
     content: '←←←';
   }
+  /* 属性选择器 */
   li[class] {
     font-size: 200%;
   }
@@ -44,6 +67,7 @@
   li[class$='b'] {
     color: red;
   }
+  /* 类型选择器 */
   span {
     background-color: aquamarine;
     font-family: Arial, Helvetica, sans-serif;
@@ -68,6 +92,7 @@
     color:cadetblue;
     font-size: 150%;
   }
+  /* 类选择器 */
   .web {
     font-size: 2em;
     color: yellowgreen;
@@ -88,6 +113,7 @@
   a:hover {
     text-decoration: none;
   }
+  /* id 选择器 */
   #box {
     margin: 30px;
     width: 100px;

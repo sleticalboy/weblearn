@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>css 布局</title>
+</head>
+
+<body>
+  <h1>css 布局</h1>
+
+  <div class="mcolumns">
+    <h2>多列布局</h2>
+    <div class="mcContainer">
+      <h1>Multi-column layout</h1>
+
+      <p>Paragraph 1.</p>
+      <p>Paragraph 2.</p>
+    </div>
+
+  </div>
+
+  <div class="posContainer">
+    <h2>定位示例</h2>
+
+    <p>I am a basic block level element.</p>
+    <p class="positioned">I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+    <p>I am a basic block level element.</p>
+
+  </div>
+
+  <div class="floatContainer">
+    <h2>float 示例</h2>
+    <div class="box">Float</div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla luctus aliquam
+      dolor, eu lacinia lorem placerat vulputate. Duis felis orci, pulvinar id metus
+      ut, rutrum luctus orci. Cras porttitor imperdiet nunc, at ultricies tellus
+      laoreet sit amet. Sed auctor cursus massa at porta. Integer ligula ipsum,
+      tristique sit amet orci vel, viverra egestas ligula. Curabitur vehicula tellus
+      neque, ac ornare ex malesuada et. In vitae convallis lacus. Aliquam erat
+      volutpat. Suspendisse ac imperdiet turpis. Aenean finibus sollicitudin eros
+      pharetra congue. Duis ornare egestas augue ut luctus. Proin blandit quam nec
+      lacus varius commodo et a urna. Ut id ornare felis, eget fermentum sapien.
+    </p>
+  </div>
+
+  <div>
+    <h2>网格布局示例</h2>
+    <div class="wrapper2">
+      <div class="box1">one</div>
+      <div class="box2">two</div>
+      <div class="box3">three</div>
+    </div>
+
+    <div class="wrapper">
+      <div>1</div>
+      <div>2</div>
+      <div>3</div>
+      <div>4</div>
+      <div>5</div>
+      <div>6</div>
+    </div>
+
+  </div>
+</body>
+
+</html>
+
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  .mcolumns {
+    background-color: wheat;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .mcContainer {
+    /* 定义列宽 */
+    column-width: 200px;
+  }
+
+  .posContainer {
+    background-color: antiquewhite;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100% - 20px;
+    height: 300px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+  }
+
+  p {
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+  }
+
+  .positioned {
+    /* 相对 relative、绝对 absolute、固定 fix、粘性 sticky */
+    position: sticky;
+    top: 30px;
+    left: 30px;
+    background: rgba(255, 84, 104, 0.3);
+    border: 2px dotted rgb(255, 84, 104);
+  }
+
+  .floatContainer {
+    width: 500px;
+    border: .2em dotted black;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+  .box {
+    background-color: burlywood;
+    width: 100px;
+    height: 100px;
+    border-radius: 20px;
+    padding: 20px;
+    margin-right: 10px;
+    /* 浮动 */
+    float: left;
+  }
+
+  .wrapper {
+    background-color: aliceblue;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px;
+    margin-bottom: 10px;
+  }
+
+  .wrapper>div {
+    border-radius: 10px;
+    background-color: aquamarine;
+    padding: 20px;
+  }
+
+  .wrapper2 {
+    background-color: aliceblue;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100px 100px;
+    margin-bottom: 10px;
+  }
+
+  .wrapper2>div {
+    border-radius: 10px;
+    background-color: aqua;
+    padding: 20px;
+  }
+
+  /* 哪一行开始、结束 */
+  /* 哪一列开始、结束 */
+  .box1 {
+    /* 第一行 & 第一列到第四列 */
+    grid-row: 1;
+    grid-column: 2 / 4;
+  }
+
+  .box2 {
+    /* 第一行到第四行 & 第一列 */
+    grid-row: 1 / 3;
+    grid-column: 1;
+  }
+
+  .box3 {
+    /* 第二行 & 第三列 */
+    grid-row: 2;
+    grid-column: 3;
+  }
+</style>
