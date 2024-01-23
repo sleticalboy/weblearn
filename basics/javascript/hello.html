@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- defer 告诉浏览器遇到 script 元素时继续下载 html 内容 -->
+  <script src="./hello.js" defer></script>
+  <title>js</title>
+  <style>
+    p {
+      font-family: Arial, Helvetica, sans-serif;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      border: 2px solid rgb(0 0 200 / 0.6);
+      background: rgb(0 0 200 / 0.6);
+      color: rgb(255 255 255 / 1);
+      box-shadow: 1px 1px 1px rgb(0 0 200 / 0.4);
+      border-radius: 10px;
+      padding: 3px 10px;
+      display: inline-block;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <p>你的名字：xxx</p> <br>
+
+  <button>hello</button> <br>
+  <button>world</button> <br>
+
+  <!-- https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/A_first_splash -->
+</body>
+
+</html>
+
+<script>
+  // 只会选中第一个
+  const para = document.querySelector('p');
+  para.addEventListener('click', () => {
+    const name = prompt('输入你的名字');
+    para.textContent = `你的名字：${name}`
+  });
+</script>
