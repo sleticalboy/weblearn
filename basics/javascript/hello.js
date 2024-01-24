@@ -7,8 +7,9 @@ function createParagraph(e) {
     text = e.srcElement.innerText
   }
   pp.textContent = `你点击了 '${text}'`;
-  document.body.appendChild(pp);
-  document.body.appendChild(document.createElement('br'))
+  const div = document.createElement('div')
+  div.appendChild(pp)
+  document.body.appendChild(div);
 }
 
 document.addEventListener('DOMContentLoaded', () => {

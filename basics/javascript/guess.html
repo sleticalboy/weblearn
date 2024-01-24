@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./guess.js" defer></script>
+  <title>猜数字游戏</title>
+  <style>
+    p {
+      font-size: 1em;
+      font-family: 'Courier New', Courier, monospace;
+      width: 500px;
+    }
+
+    .judge {
+      background-color: red;
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>猜数字游戏</h1>
+  <p>
+    We have selected a random number between 1 and 100. See if you can guess it in 10 turns or fewer. We'll tell you if
+    your guess was too high or too low.
+  </p>
+  输入一个数字：<input id="guess" type="number" placeholder="1-100 以内数字"> <input id="submit" type="button" value="提交">
+  <div class="result">
+    <p id="prev">上一个数字：</p>
+    <p id="judge">错误！</p>
+    <p id="prompt">太小了</p>
+  </div>
+</body>
+
+</html>
+
+<script>
+  let targetNum;
+  let guessNum;
+  let lastNum;
+  let againBtn = null;
+  let counter = 1;
+
+  const input = document.querySelector('#guess');
+  const prev = document.querySelector('#prev');
+  const judge = document.querySelector('#judge');
+  const prompt = document.querySelector('#prompt');
+  document.querySelector('#submit').addEventListener('click', comapre);
+
+  function prepare(reset = false) {
+    prev.innerText = '';
+    judge.innerText = '';
+    guessNum = NaN;
+    targetNum = Math.floor(Math.random() * 100) + 1;
+    console.log('target num is: ', targetNum);
+    if (reset === true) {
+      // 重置游戏
+      againBtn = document.createElement('button');
+      againBtn.textContent = '重新开始';
+      againBtn.addEventListener('click', () => prepare());
+      document.body.appendChild(againBtn)
+    } else {
+      prompt.innerText = ''
+      if (againBtn) {
+        againBtn.parentNode.removeChild(againBtn);
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => prepare());
+
+  function update(less) {
+    if (prev.innerText === '') {
+      prev.innerText = `上一个数字： ${lastNum}`;
+    } else {
+      prev.innerText += ', ' + lastNum;
+    }
+    prompt.style.backgroundColor = 'red';
+    if (less) {
+      prompt.innerText = '太小了';
+    } else {
+      prompt.innerText = '太大了';
+    }
+  }
+
+  function comapre() {
+    if (counter > 10) {
+      prompt.innerText = '超过 10 次，失败！';
+      prompt.style.backgroundColor = 'red';
+      prepare(true);
+      return;
+    }
+    guessNum = Number(input.value)
+    console.log('guess num is: ', guessNum);
+    input.value = ''
+    lastNum = guessNum;
+    counter += 1;
+    if (guessNum === targetNum) {
+      // 猜对了
+      prompt.innerText = '恭喜你，猜对了！';
+      prompt.style.backgroundColor = 'green';
+      prepare(true);
+    } else {
+      update(guessNum < targetNum)
+    }
+  }
+
+</script>
