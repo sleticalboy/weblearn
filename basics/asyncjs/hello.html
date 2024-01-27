@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>异步 js</title>
+</head>
+
+<body>
+  <h1>异步 JavaScript</h1>
+  <li>
+    <button id="btn_get">发送请求</button> <button id="btn_reset">重置</button>
+  </li>
+  <div>
+    <pre id="getr"></pre>
+  </div>
+
+  <div>
+    Name: <input id="iname" type="text" value="李斌"> <br>
+    Delay: <input id="idelay" type="number" value="1000"> <br>
+    <button id="btn_alarm">设置闹钟</button>
+    <p id="alarmr"></p>
+  </div>
+</body>
+
+</html>
+
+<script>
+
+  document.querySelector('#btn_get').addEventListener('click', sendRequest);
+  document.querySelector('#btn_reset').addEventListener('click', resetRequest);
+
+  // 发送请求
+  function sendRequest() {
+    const promise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+    promise.then((resp) => {
+      console.log(`resp: ${resp.status} -> ${promise}`);
+      if (!resp.ok) {
+        throw new Error(`http error: ${resp.statusText}`);
+      }
+      // 这个方法也是异步的，返回值是 promise
+      return resp.json();
+    }).then((resp) => {
+      return JSON.stringify(resp, null, 2);
+    }).then((result) => {
+      console.log(promise);
+      document.querySelector('#getr').innerText = result;
+    }).catch((error) => {
+      console.log(`request error: ${error}`);
+    });
+    console.log(promise)
+  }
+
+  // 充值请求
+  function resetRequest() {
+    document.querySelector('#getr').innerText = '';
+  }
+
+  document.getElementById('btn_alarm').addEventListener('click', setAlarm);
+  const alarmr = document.getElementById('alarmr');
+  const iname = document.getElementById('iname');
+  const idelay = document.getElementById('idelay');
+
+  async function setAlarm() {
+    // 第一种方式
+    // window.setTimeout(() => {
+    //   alarmr.textContent = `起床了: ${name.value}！`;
+    // }, 1000);
+    // 第二种方式
+    // alarm(iname.value, idelay.value)
+    //   .then((message) => {
+    //     alarmr.textContent = message;
+    //   }).catch((error) => {
+    //     alarmr.textContent = `设置闹钟失败：${error}`;
+    //   })
+    // 第三种方式
+    try {
+      const message = await alarm(iname.value, idelay.value);
+      alarmr.textContent = message;
+    } catch (error) {
+      alarmr.textContent = `设置闹钟失败：${error}`;
+    }
+  }
+
+  function alarm(name, delay) {
+    return new Promise((resolve, reject) => {
+      if (delay < 0) {
+        throw new Error('时间不能是负数');
+      }
+      window.setTimeout(() => {
+        resolve(`起床了: ${name}！`);
+      }, delay);
+    });
+  }
+</script>
