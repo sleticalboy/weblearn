@@ -3,7 +3,9 @@
 // Workers 和主代码运行在完全分离的环境中，只有通过相互发送消息来进行交互。
 // 特别是，这意味着 workers 不能访问 DOM（窗口、文档、页面元素等等）。
 
-// 创建 dedicated worker，当 worker 被创建时，generate.js 将被执行
+// worker 有三种：专用 worker、共享 worker、service worker
+
+// 创建专用 worker，当 worker 被创建时，generate.js 将被执行
 // 需要在服务器上运行，否则会报错，详见：
 // https://developer.mozilla.org/zh-CN/docs/Learn/Common_questions/Tools_and_setup/set_up_a_local_testing_server
 const worker = new Worker('./generate.js');
