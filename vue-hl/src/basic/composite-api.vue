@@ -1,3 +1,4 @@
+<!--js 脚本（组合式 api）-->
 <script setup>
 import { computed, onMounted, onUnmounted, onUpdated, reactive, ref, watch } from 'vue';
 
@@ -18,9 +19,7 @@ function increment() {
 
 const programer = reactive({
   name: '李斌',
-  languages: [
-    'java', 'python', 'go', 'c++'
-  ]
+  languages: ['java', 'python', 'go', 'c++']
 })
 
 const size = computed(() => {
@@ -44,6 +43,7 @@ onUnmounted(() => {
 })
 </script>
 
+<!--模板-->
 <template>
   <h2>{{ count }}</h2>
   <button @click="increment">点击了 {{ count }} 次</button>
