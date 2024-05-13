@@ -1,10 +1,65 @@
 <script>
-import {ArrowDown, Lightning, Location, MoonNight, Setting, UserFilled} from "@element-plus/icons-vue";
+import {
+  ArrowDown, Avatar,
+  DocumentAdd, DocumentChecked, Finished,
+  Lightning,
+  Location,
+  MoonNight, Rank,
+  RemoveFilled,
+  Setting, Timer,
+  UserFilled
+} from "@element-plus/icons-vue";
+
+import {logout, settings} from "@/api/users.js";
+
+function handleSettings(r) {
+  r.settings.forEach(item => {
+    switch (item.key) {
+      case 'profile':
+        item.handler = () => {}
+        break
+      case 'settings':
+        item.handler = () => {};
+        break
+      case 'theme':
+        item.handler = () => {};
+        break
+    }
+  })
+  return r
+}
 
 export default {
   name: 'App',
-  components: {MoonNight, Lightning, UserFilled, ArrowDown, Setting, Location},
+  components: {
+    Avatar,
+    Timer,
+    Rank,
+    Finished,
+    DocumentChecked,
+    DocumentAdd,
+    RemoveFilled,
+    MoonNight,
+    Lightning,
+    UserFilled,
+    ArrowDown,
+    Setting,
+    Location
+  },
+  data() {
+    return {
+      settings: {
+        data: {},
+        err: null
+      },
+    }
+  },
   mounted() {
+    settings().then((r, err) => {
+      this.settings.data = handleSettings(r['data'])
+      this.settings.err = err
+    })
+    this.compApi()
   },
   methods: {
     compApi() {
@@ -14,7 +69,10 @@ export default {
       this.$router.push({path: '/opt-api'})
     },
     doLogout() {
-      this.$router.push({path: '/login'})
+      logout().then(r => {
+        console.log(`doLogout() data: ${r}`)
+        this.$router.push({path: '/login'})
+      })
     }
   }
 }
@@ -22,33 +80,33 @@ export default {
 
 <template>
   <div id="app">
-    <el-container style="height: 900px; border: 1px solid #eee">
-      <el-header style="text-align: right; font-size: 12px">
-        <el-dropdown trigger="click" style="height: 100%; text-align: center">
-          <span class="el-dropdown-link">下拉菜单 <el-icon><arrow-down/></el-icon></span>
-          <template #dropdown>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <el-icon>
-                  <user-filled/>
-                </el-icon>
-                用户中心
-              </el-dropdown-item>
-              <el-dropdown-item>
-                <el-icon>
-                  <setting/>
-                </el-icon>
-                设置
-              </el-dropdown-item>
-              <el-dropdown-item disabled>
-                <el-icon>
-                  <moon-night/>
-                </el-icon>
-                主题
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+    <el-container style="height: 950px; border: 1px solid #eee">
+      <el-header>
+        <el-row :gutter="22">
+          <el-col :span="12" style="text-align: start; align-items: center">
+            <el-text>
+              <el-icon><Rank /></el-icon> vue 学习指南
+            </el-text>
+          </el-col>
+          <el-col :span="12" style="text-align: right;padding-right: 0">
+            <el-dropdown v-if="settings.data && settings.err == null" trigger="click">
+              <el-button type="text">
+                配置中心 <el-icon class="el-icon--down"><arrow-down /></el-icon>
+              </el-button>
+              <template #dropdown>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item v-for="item in settings.data.settings" :key="item.key"
+                                    @click="item.handler" divided>
+                    {{item.desc}}
+                  </el-dropdown-item>
+                  <el-dropdown-item @click="doLogout" divided>
+                    退出登录
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </el-col>
+        </el-row>
       </el-header>
       <el-container>
         <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
@@ -62,18 +120,20 @@ export default {
         </el-main>
       </el-container>
       <el-footer style="text-align: right">
-        <el-text>用户 | 角色 </el-text>
-        <el-button @click="doLogout">退出</el-button>
+        <el-text><el-icon><Avatar /></el-icon> {{settings.data.user}} | {{settings.data.role}} <el-icon><Timer /></el-icon> {{settings.data.login_time}}</el-text>
       </el-footer>
     </el-container>
   </div>
 </template>
 
 <style>
+.el-text, .el-button {
+  font-size: 1.5em;
+}
 .el-header, .el-footer {
-  background-color: #B3C0D1;
-  color: #333;
-  line-height: 60px;
+  --el-header-padding: 0 10px;
+  --el-footer-padding: 0 10px;
+  height: auto;
 }
 
 .el-aside {
